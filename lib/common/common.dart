@@ -5,3 +5,4 @@ import 'package:go_router/go_router.dart';
 import 'package:voice_app/ui/ui.dart';
 
 part 'router.dart';
+part 'customs.dart';

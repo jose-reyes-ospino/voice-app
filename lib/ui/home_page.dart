@@ -1,4 +1,4 @@
-part of voiceui;
+part of ui;
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});

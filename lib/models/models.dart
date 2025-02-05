@@ -1,3 +1,3 @@
 library models;
 
-part 'voice_note_model.dart';
+part 'voice_note.dart';

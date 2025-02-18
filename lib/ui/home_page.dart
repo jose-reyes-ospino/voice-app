@@ -37,11 +37,25 @@ class _HomePageState extends ConsumerState<HomePage> {
                 ),
               ],
             ),
-            const Expanded(
+            Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [],
+                  children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'New voice note',
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: CustomColors.primaryYellow,
+                                  ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

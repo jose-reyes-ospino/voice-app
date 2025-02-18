@@ -37,7 +37,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 ),
               ],
             ),
-            Expanded(
+            const Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

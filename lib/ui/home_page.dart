@@ -45,7 +45,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          ref.read(userProvider.notifier).startRecording();
+                        },
                         child: Text(
                           'New voice note',
                           style:

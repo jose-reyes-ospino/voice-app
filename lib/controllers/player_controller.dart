@@ -13,6 +13,10 @@ class PlayerController extends StateNotifier<AudioPlayer> {
     await state.play(UrlSource(url));
   }
 
+  Future<void> playVoiceNoteByBytes(Uint8List bytes) async {
+    await state.play(BytesSource(bytes));
+  }
+
   void pauseVoiceNote() {
     state.pause();
   }

@@ -47,7 +47,7 @@ final router = GoRouter(
         context: context,
         state: state,
         child: VoiceDetailPage(
-          voiceNote: state.pathParameters['voiceNote'] as VoiceNote?,
+          voiceNote: state.extra as VoiceNote?,
         ),
       ),
     ),

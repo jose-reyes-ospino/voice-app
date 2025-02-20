@@ -1,8 +1,10 @@
 part of services;
 
-class FirebaseRepository {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+final CollectionReference _voiceNotesCollection =
+    _firestore.collection('voiceNotes');
 
+class FirebaseRepository {
   Future<void> sendHelloWorld() async {
     await _firestore.collection('documents').add({'message': 'Hello World'});
   }
@@ -17,4 +19,11 @@ class FirebaseRepository {
       rethrow;
     }
   }
+
+  Query<VoiceNote> getAllVoiceNotesQuery() => _voiceNotesCollection
+      .orderBy('createdAt', descending: true)
+      .withConverter(
+        fromFirestore: (snapshot, _) => VoiceNote.fromJson(snapshot.data()!),
+        toFirestore: (visit, _) => visit.toJson(),
+      );
 }

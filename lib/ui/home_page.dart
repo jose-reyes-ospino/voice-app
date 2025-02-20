@@ -79,6 +79,63 @@ class _HomePageState extends ConsumerState<HomePage>
                         ),
                       ),
                     ),
+                    FirestoreQueryBuilder<VoiceNote>(
+                      query:
+                          ref.read(userProvider.notifier).allVoiceNotesQuery(),
+                      builder: (context, snapshot, _) {
+                        if (snapshot.hasError) {
+                          return const Center(
+                            child: Text(
+                              'Error fetching voice notes',
+                            ),
+                          );
+                        }
+
+                        if (snapshot.docs.isEmpty) {
+                          return const Center(
+                            child: Text('No hay datos para mostrar...'),
+                          );
+                        }
+
+                        return Expanded(
+                          child: ListView.builder(
+                            itemCount: snapshot.docs.length,
+                            itemBuilder: (context, index) {
+                              VoiceNote voiceNote = snapshot.docs[index].data();
+                              return InkWell(
+                                onTap: () {
+                                  ref
+                                      .read(userProvider.notifier)
+                                      .goToVoiceDetailPage(voiceNote);
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.all(10),
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      CustomDateFormat.formatDate(
+                                        voiceNote.createdAt,
+                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(
+                                            color: Colors.black,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
                 child: Center(

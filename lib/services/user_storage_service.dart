@@ -27,4 +27,31 @@ class UserStorageService {
       rethrow;
     }
   }
+
+  Future<Uint8List?> downloadVoiceNoteBytes({
+    required VoiceNote voiceNote,
+    required Function(double) onProgress,
+  }) async {
+    try {
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child('notes/${voiceNote.createdAt.millisecondsSinceEpoch}');
+      print('ref: $ref');
+
+      final downloadUrl = await ref.getDownloadURL();
+      print('downloadUrl: $downloadUrl');
+
+      final response = await http.get(Uri.parse(downloadUrl));
+      if (response.statusCode == 200) {
+        final audioBytes = response.bodyBytes;
+        print('audioBytes: $audioBytes');
+        return audioBytes;
+      } else {
+        throw Exception('Error al descargar los bytes del archivo');
+      }
+    } catch (e) {
+      print('Error al descargar nota de voz: $e');
+      rethrow;
+    }
+  }
 }

@@ -2,6 +2,7 @@ library ui;
 
 import 'dart:math';
 
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:voice_app/common/common.dart';

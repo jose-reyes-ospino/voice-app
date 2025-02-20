@@ -66,6 +66,12 @@ class UserController extends StateNotifier<VoiceNote> {
   }
 
   Future<void> playVoiceNote() async {
+    if (state.audioBytes != null) {
+      log('Playing voice note by bytes');
+      return await ref
+          .read(playerProvider.notifier)
+          .playVoiceNoteByBytes(state.audioBytes!);
+    }
     await ref.read(playerProvider.notifier).playVoiceNoteByUrl(state.localPath);
   }
 
@@ -86,18 +92,43 @@ class UserController extends StateNotifier<VoiceNote> {
             voiceNote: state,
             onProgress: (progress) {
               log('Upload progress: ${(progress * 100).toStringAsFixed(2)}%');
-              state = state.copyWith(uploadProgress: progress);
+              state = state.copyWith(loadingProgress: progress);
             },
           );
 
       state = state.copyWith(audioUrl: url);
       log('Voice note uploaded successfully');
       await ref.read(userRepositoryProvider).saveVoiceNoteData(state);
-      router.go(VoiceDetailPage.routeName, extra: {'voiceNote': state});
+      router.go(VoiceDetailPage.routeName, extra: state);
     } catch (e) {
       log('Error uploading voice note: $e');
     } finally {
-      state = state.copyWith(uploadProgress: 0);
+      state = state.copyWith(loadingProgress: 0);
+    }
+  }
+
+  Query<VoiceNote> allVoiceNotesQuery() {
+    return ref.read(userRepositoryProvider).getAllVoiceNotesQuery();
+  }
+
+  Future<void> goToVoiceDetailPage(VoiceNote voiceNote) async {
+    try {
+      router.push(LoadingScreen.routeName);
+      final Uint8List? audioBytes =
+          await ref.read(userStorageProvider).downloadVoiceNoteBytes(
+                voiceNote: voiceNote,
+                onProgress: (progress) {
+                  log('Download progress: ${(progress * 100).toStringAsFixed(2)}%');
+                  state = state.copyWith(loadingProgress: progress);
+                },
+              );
+
+      state = voiceNote.copyWith(audioBytes: audioBytes);
+      router.go(VoiceDetailPage.routeName, extra: state);
+    } catch (e) {
+      log('Error going to voice detail page: $e');
+    } finally {
+      state = state.copyWith(loadingProgress: 0);
     }
   }
 }

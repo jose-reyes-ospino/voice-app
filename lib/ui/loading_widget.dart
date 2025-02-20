@@ -16,7 +16,7 @@ class LoadingScreen extends ConsumerStatefulWidget {
 class _LoadingScreenState extends ConsumerState<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
-    final progress = ref.watch(userProvider).uploadProgress;
+    final progress = ref.watch(userProvider).loadingProgress;
     return Scaffold(
       body: Center(
         child: Column(

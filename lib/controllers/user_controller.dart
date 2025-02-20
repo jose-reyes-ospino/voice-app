@@ -37,4 +37,12 @@ class UserController extends StateNotifier<VoiceNote> {
 
     state = state.copyWith(isRecording: false);
   }
+
+  Future<void> sendHelloWorld() async {
+    try {
+      await ref.read(userRepositoryProvider).sendHelloWorld();
+    } catch (e) {
+      log('Error sending hello world: $e');
+    }
+  }
 }

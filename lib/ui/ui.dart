@@ -8,3 +8,4 @@ import 'package:voice_app/common/common.dart';
 import 'package:voice_app/providers/providers.dart';
 
 part 'home_page.dart';
+part 'loading_widget.dart';

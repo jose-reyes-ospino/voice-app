@@ -58,32 +58,28 @@ class _HomePageState extends ConsumerState<HomePage>
             Expanded(
               child: Visibility(
                 visible: ref.watch(userProvider).isRecording,
-                replacement: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            onPressed: () {
-                              ref.read(userProvider.notifier).startRecording();
-                            },
-                            child: Text(
-                              'New voice note',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.copyWith(
-                                    color: CustomColors.primaryYellow,
-                                  ),
-                            ),
+                replacement: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            ref.read(userProvider.notifier).startRecording();
+                          },
+                          child: Text(
+                            'New voice note',
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      color: CustomColors.primaryYellow,
+                                    ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 child: Center(
                   child: Column(

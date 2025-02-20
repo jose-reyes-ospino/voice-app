@@ -11,3 +11,4 @@ part 'home_page.dart';
 part 'loading_widget.dart';
 part 'recorded_widget.dart';
 part 'play_or_pause_widget.dart';
+part 'voice_detail_page.dart';

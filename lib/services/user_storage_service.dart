@@ -3,6 +3,7 @@ part of services;
 class UserStorageService {
   Future<String> uploadVoiceNote({
     required VoiceNote voiceNote,
+    Function(double)? onProgress,
   }) async {
     try {
       final fileName = 'notes/${voiceNote.createdAt.millisecondsSinceEpoch}';
@@ -11,9 +12,15 @@ class UserStorageService {
       final storageRef = storage.ref().child(fileName);
 
       final bytes = await file.readAsBytes();
-      final uploadTask = await storageRef.putData(bytes);
+      final uploadTask = storageRef.putData(bytes);
 
-      final downloadUrl = await uploadTask.ref.getDownloadURL();
+      uploadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
+        final progress = snapshot.bytesTransferred / snapshot.totalBytes;
+        onProgress?.call(progress);
+      });
+
+      final downloadUrl =
+          await uploadTask.then((snapshot) => snapshot.ref.getDownloadURL());
       return downloadUrl;
     } catch (e) {
       log('Error en la subida de la nota de voz: $e');

@@ -7,6 +7,7 @@ class VoiceNote {
     this.audioUrl = '',
     this.localPath = '',
     this.isRecording = false,
+    this.uploadProgress = 0,
   });
 
   final String id;
@@ -14,13 +15,13 @@ class VoiceNote {
   final DateTime createdAt;
   final bool isRecording;
   final String localPath;
+  final double uploadProgress;
 
   factory VoiceNote.fromJson(Map<String, dynamic> json) {
     return VoiceNote(
       id: json['id'] ?? '',
       audioUrl: json['audioUrl'] ?? '',
       createdAt: json['createdAt'] ?? DateTime.now(),
-      localPath: json['localPath'] ?? '',
     );
   }
 
@@ -29,7 +30,6 @@ class VoiceNote {
       'id': id,
       'audioUrl': audioUrl,
       'createdAt': createdAt,
-      'localPath': localPath,
     };
   }
 
@@ -39,6 +39,7 @@ class VoiceNote {
     DateTime? createdAt,
     bool? isRecording,
     String? localPath,
+    double? uploadProgress,
   }) {
     return VoiceNote(
       id: id ?? this.id,
@@ -46,6 +47,7 @@ class VoiceNote {
       createdAt: createdAt ?? this.createdAt,
       isRecording: isRecording ?? this.isRecording,
       localPath: localPath ?? this.localPath,
+      uploadProgress: uploadProgress ?? this.uploadProgress,
     );
   }
 }

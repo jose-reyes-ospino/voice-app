@@ -40,5 +40,9 @@ final router = GoRouter(
       path: LoadingScreen.routeName,
       child: const LoadingScreen(),
     ),
+    _getRoute(
+      path: VoiceDetailPage.routeName,
+      child: const VoiceDetailPage(),
+    ),
   ],
 );

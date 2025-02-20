@@ -6,6 +6,7 @@ class RecordedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         const Spacer(flex: 3),
         Text(
@@ -31,29 +32,30 @@ class RecordedWidget extends StatelessWidget {
         ),
         const Spacer(flex: 2),
         Wrap(
-          spacing: 20,
-          runSpacing: 40,
+          spacing: 10,
+          runSpacing: 10,
+          alignment: WrapAlignment.center,
           children: [
             SizedBox(
-              width: 120,
+              width: 100,
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
                 ),
                 child: Text('Discard',
-                    style: Theme.of(context).textTheme.bodyLarge),
+                    style: Theme.of(context).textTheme.bodyMedium),
               ),
             ),
             SizedBox(
-              width: 120,
+              width: 100,
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
                 ),
                 child:
-                    Text('Save', style: Theme.of(context).textTheme.bodyLarge),
+                    Text('Save', style: Theme.of(context).textTheme.bodyMedium),
               ),
             ),
           ],

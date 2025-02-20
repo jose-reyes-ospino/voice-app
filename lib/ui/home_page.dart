@@ -137,7 +137,9 @@ class _HomePageState extends ConsumerState<HomePage>
                         ),
                         child: IconButton(
                           onPressed: () {
-                            ref.read(userProvider.notifier).stopRecording();
+                            ref
+                                .read(userProvider.notifier)
+                                .stopRecording(context);
                           },
                           icon: const Icon(
                             Icons.stop,

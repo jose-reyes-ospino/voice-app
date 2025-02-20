@@ -31,11 +31,24 @@ class UserController extends StateNotifier<VoiceNote> {
     }
   }
 
-  Future<void> stopRecording() async {
+  Future<void> stopRecording(context) async {
     final path = await record.stop();
     log('Recording stopped at path: $path');
-
     state = state.copyWith(isRecording: false);
+    if (path != null) {
+      showDialog<void>(
+        context: context,
+        builder: (context) => const AlertDialog(
+          content: SizedBox(
+            height: 300,
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: RecordedWidget(),
+            ),
+          ),
+        ),
+      );
+    }
   }
 
   Future<void> sendHelloWorld() async {

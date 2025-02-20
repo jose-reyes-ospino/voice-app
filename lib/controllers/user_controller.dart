@@ -65,14 +65,24 @@ class UserController extends StateNotifier<VoiceNote> {
     }
   }
 
-  Future<void> playVoiceNote() async {
-    if (state.audioBytes != null) {
-      log('Playing voice note by bytes');
-      return await ref
+  Future<void> playVoiceNote(context) async {
+    try {
+      if (state.audioBytes != null) {
+        log('Playing voice note by bytes');
+        return await ref
+            .read(playerProvider.notifier)
+            .playVoiceNoteByBytes(state.audioBytes!);
+      }
+      await ref
           .read(playerProvider.notifier)
-          .playVoiceNoteByBytes(state.audioBytes!);
+          .playVoiceNoteByUrl(state.localPath);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Sorry, there was an error playing the voice note')),
+      );
+      log('Error playing voice note: $e');
     }
-    await ref.read(playerProvider.notifier).playVoiceNoteByUrl(state.localPath);
   }
 
   void pauseVoiceNote() {

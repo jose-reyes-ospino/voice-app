@@ -34,7 +34,7 @@ class _RecordedWidgetState extends ConsumerState<RecordedWidget> {
           isPlaying: ref.watch(playerProvider.notifier).isPlaying,
           onPlay: () async {
             setState(() {});
-            await ref.read(userProvider.notifier).playVoiceNote();
+            await ref.read(userProvider.notifier).playVoiceNote(context);
             setState(() {});
           },
           onPause: () {

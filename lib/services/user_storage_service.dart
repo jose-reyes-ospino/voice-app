@@ -39,8 +39,6 @@ class UserStorageService {
           .child('notes/${voiceNote.createdAt.millisecondsSinceEpoch}.wav');
 
       final downloadUrl = await ref.getDownloadURL();
-
-      // Usar dio en lugar de http para mejor manejo de progreso y errores
       final dio = Dio();
       final response = await dio.get(
         downloadUrl,
@@ -62,16 +60,9 @@ class UserStorageService {
         final audioBytes = response.data as Uint8List;
         return audioBytes;
       } else {
-        throw Exception(
-            'Error al descargar los bytes del archivo: ${response.statusCode}');
+        throw Exception('Error downloading voice note: ${response.statusCode}');
       }
-    } on DioException catch (e) {
-      print('Error de Dio al descargar nota de voz: ${e.message}');
-      log('Error tipo: ${e.type}');
-      log('Error respuesta: ${e.response}');
-      rethrow;
     } catch (e) {
-      log('Error general al descargar nota de voz: $e');
       rethrow;
     }
   }

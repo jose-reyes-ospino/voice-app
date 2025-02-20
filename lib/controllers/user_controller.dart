@@ -48,6 +48,10 @@ class UserController extends StateNotifier<VoiceNote> {
           ),
         ),
       );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('There was an error stopping recording')),
+      );
     }
   }
 

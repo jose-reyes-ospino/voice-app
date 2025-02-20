@@ -1,8 +1,13 @@
 part of ui;
 
-class RecordedWidget extends StatelessWidget {
+class RecordedWidget extends ConsumerStatefulWidget {
   const RecordedWidget({super.key});
 
+  @override
+  ConsumerState<RecordedWidget> createState() => _RecordedWidgetState();
+}
+
+class _RecordedWidgetState extends ConsumerState<RecordedWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,9 +31,16 @@ class RecordedWidget extends StatelessWidget {
         ),
         CustomSpacing.verticalSpace24,
         PlayOrPauseWidget(
-          isPlaying: false,
-          onPlay: () {},
-          onPause: () {},
+          isPlaying: ref.watch(playerProvider.notifier).isPlaying,
+          onPlay: () async {
+            setState(() {});
+            await ref.read(userProvider.notifier).playVoiceNote();
+            setState(() {});
+          },
+          onPause: () {
+            setState(() {});
+            ref.read(userProvider.notifier).pauseVoiceNote();
+          },
         ),
         const Spacer(flex: 2),
         Wrap(
@@ -39,7 +51,8 @@ class RecordedWidget extends StatelessWidget {
             SizedBox(
               width: 100,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () =>
+                    ref.read(userProvider.notifier).discardVoiceNote(context),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
                 ),

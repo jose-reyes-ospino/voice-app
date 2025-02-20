@@ -5,6 +5,7 @@ class VoiceNote {
     required this.createdAt,
     this.id = '',
     this.audioUrl = '',
+    this.localPath = '',
     this.isRecording = false,
   });
 
@@ -12,12 +13,14 @@ class VoiceNote {
   final String audioUrl;
   final DateTime createdAt;
   final bool isRecording;
+  final String localPath;
 
   factory VoiceNote.fromJson(Map<String, dynamic> json) {
     return VoiceNote(
       id: json['id'] ?? '',
       audioUrl: json['audioUrl'] ?? '',
       createdAt: json['createdAt'] ?? DateTime.now(),
+      localPath: json['localPath'] ?? '',
     );
   }
 
@@ -26,6 +29,7 @@ class VoiceNote {
       'id': id,
       'audioUrl': audioUrl,
       'createdAt': createdAt,
+      'localPath': localPath,
     };
   }
 
@@ -34,12 +38,14 @@ class VoiceNote {
     String? audioUrl,
     DateTime? createdAt,
     bool? isRecording,
+    String? localPath,
   }) {
     return VoiceNote(
       id: id ?? this.id,
       audioUrl: audioUrl ?? this.audioUrl,
       createdAt: createdAt ?? this.createdAt,
       isRecording: isRecording ?? this.isRecording,
+      localPath: localPath ?? this.localPath,
     );
   }
 }

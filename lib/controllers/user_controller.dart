@@ -36,8 +36,10 @@ class UserController extends StateNotifier<VoiceNote> {
     log('Recording stopped at path: $path');
     state = state.copyWith(isRecording: false);
     if (path != null) {
+      state = state.copyWith(localPath: path);
       showDialog<void>(
         context: context,
+        barrierDismissible: false,
         builder: (context) => const AlertDialog(
           content: SizedBox(
             height: 300,
@@ -61,5 +63,18 @@ class UserController extends StateNotifier<VoiceNote> {
     } catch (e) {
       log('Error sending hello world: $e');
     }
+  }
+
+  Future<void> playVoiceNote() async {
+    await ref.read(playerProvider.notifier).playVoiceNoteByUrl(state.localPath);
+  }
+
+  void pauseVoiceNote() {
+    ref.read(playerProvider.notifier).pauseVoiceNote();
+  }
+
+  void discardVoiceNote(context) {
+    state = VoiceNote(createdAt: DateTime.now());
+    Navigator.of(context).pop();
   }
 }

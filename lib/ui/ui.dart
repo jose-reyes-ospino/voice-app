@@ -9,3 +9,5 @@ import 'package:voice_app/providers/providers.dart';
 
 part 'home_page.dart';
 part 'loading_widget.dart';
+part 'recorded_widget.dart';
+part 'play_or_pause_widget.dart';

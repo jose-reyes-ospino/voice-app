@@ -40,9 +40,16 @@ final router = GoRouter(
       path: LoadingScreen.routeName,
       child: const LoadingScreen(),
     ),
-    _getRoute(
+    GoRoute(
       path: VoiceDetailPage.routeName,
-      child: const VoiceDetailPage(),
+      pageBuilder: (BuildContext context, GoRouterState state) =>
+          _buildPageWithDefaultTransition(
+        context: context,
+        state: state,
+        child: VoiceDetailPage(
+          voiceNote: state.pathParameters['voiceNote'] as VoiceNote?,
+        ),
+      ),
     ),
   ],
 );

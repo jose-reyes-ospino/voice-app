@@ -93,7 +93,7 @@ class UserController extends StateNotifier<VoiceNote> {
       state = state.copyWith(audioUrl: url);
       log('Voice note uploaded successfully');
       await ref.read(userRepositoryProvider).saveVoiceNoteData(state);
-      router.go(VoiceDetailPage.routeName);
+      router.go(VoiceDetailPage.routeName, extra: {'voiceNote': state});
     } catch (e) {
       log('Error uploading voice note: $e');
     } finally {

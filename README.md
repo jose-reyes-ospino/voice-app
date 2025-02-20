@@ -7,6 +7,7 @@ Tests are pending, I'll add them as soon as I can give more love to this exercis
 
 A quick look at the [board](https://link.excalidraw.com/l/3GH27hKMu4d/4tW4N0OtTKR) I used to help me:
 
-![image](https://github.com/user-attachments/assets/5ed47166-259f-45d8-9b81-da9fd310ba28)
+![image](https://github.com/user-attachments/assets/960e2072-9b27-411d-a8cf-7ead512bbe52)
+
 
 ![image](https://github.com/user-attachments/assets/6480492a-66e1-408d-921c-a00ecc42e79f)

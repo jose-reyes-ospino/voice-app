@@ -77,4 +77,18 @@ class UserController extends StateNotifier<VoiceNote> {
     state = VoiceNote(createdAt: DateTime.now());
     Navigator.of(context).pop();
   }
+
+  Future<void> uploadVoiceNote() async {
+    try {
+      router.push(LoadingScreen.routeName);
+
+      final String url =
+          await ref.read(userStorageProvider).uploadVoiceNote(voiceNote: state);
+      state = state.copyWith(audioUrl: url);
+      log('Voice note uploaded successfully');
+      await ref.read(userRepositoryProvider).saveVoiceNoteData(state);
+    } catch (e) {
+      log('Error uploading voice note: $e');
+    }
+  }
 }

@@ -9,3 +9,4 @@ import 'package:voice_app/services/services.dart';
 part 'user_provider.dart';
 part 'user_repository_provider.dart';
 part 'player_provider.dart';
+part 'user_storage_provider.dart';

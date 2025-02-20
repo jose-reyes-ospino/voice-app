@@ -63,7 +63,8 @@ class _RecordedWidgetState extends ConsumerState<RecordedWidget> {
             SizedBox(
               width: 100,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () =>
+                    ref.read(userProvider.notifier).uploadVoiceNote(),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
                 ),

@@ -36,5 +36,9 @@ final router = GoRouter(
       path: HomePage.route,
       child: const HomePage(),
     ),
+    _getRoute(
+      path: LoadingScreen.routeName,
+      child: const LoadingScreen(),
+    ),
   ],
 );

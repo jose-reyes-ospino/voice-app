@@ -1,7 +1,7 @@
 # voice_app
 This is alive here https://voice-recording-blue.vercel.app/
 
-I tried to set up the whole project on the web to make it easier to run. Currently it does not run on any other platform (some bugs on my machine with firebase CLI). In general it succeeds in all use cases except playing voice memos remotely because of a CORS issue that I don't remember now.
+I tried to set up the whole project on the web to make it easier to run. Currently it does not run on any other platform (some bugs on my machine with firebase CLI). In general it succeeds in all use cases except playing voice memos remotely because of a CORS issue that I don't remember how to solve now.
 
 Tests are pending, I'll add them as soon as I can give more love to this exercise :)
 
